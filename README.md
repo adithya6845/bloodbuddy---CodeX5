@@ -1,16 +1,58 @@
-# React + Vite
+## BloodBuddy - Emergency Blood Donor Network
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+BloodBuddy is a small React + Vite app that helps connect blood donors with people in need during emergencies. This repo contains the source code and a GitHub Actions workflow to build and deploy the app to GitHub Pages.
 
-Currently, two official plugins are available:
+## How to run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Install dependencies:
 
-## React Compiler
+```powershell
+npm install
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Start the dev server:
 
-## Expanding the ESLint configuration
+```powershell
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Build for production:
+
+```powershell
+npm run build
+```
+
+Preview production build locally:
+
+```powershell
+npm run preview
+```
+
+## Deployment options
+
+1) GitHub Pages (automatic via Actions)
+
+- This repository includes a workflow `.github/workflows/deploy.yml` that builds the app on pushes to `master` and deploys the `dist` folder to GitHub Pages.
+- Vite is configured with `base: './'` so the build uses relative asset paths (works for GitHub Pages).
+- After you push to `master`, open the repository Settings → Pages to confirm the deployment status (Actions will create a Pages deployment automatically). It may take a minute for the first deployment.
+
+2) Vercel (recommended for simplest workflow)
+
+- Go to https://vercel.com, connect your GitHub account, pick this repository and deploy. Vercel will detect the React + Vite app and use `npm run build` automatically.
+
+3) Netlify
+
+- Create a new site from Git in Netlify, connect your GitHub repo. Set build command `npm run build` and publish directory `dist`.
+
+## Notes & troubleshooting
+
+- If the site shows broken asset paths after deployment, ensure `vite.config.js` contains `base: './'` (already configured here).
+- If Actions fails, check the Actions tab in GitHub to inspect logs and error messages.
+
+If you'd like I can:
+
+- Configure a Vercel deployment for you (I can provide steps or create a vercel.json if needed).
+- Add a Netlify/Terraform config.
+- Configure a custom domain (you'll need DNS control).
+
+Tell me which provider you'd like and I'll either finish the GitHub Pages setup or create the provider-specific config.
